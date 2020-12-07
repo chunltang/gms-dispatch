@@ -1,0 +1,31 @@
+spring:
+  rabbitmq:
+    virtual-host: /
+    host: ${RABBITMQ_SERVER_HOST}
+    username: gms
+    password: ${SERVER_PWD}
+    port: 5672
+    requested-heartbeat: 60
+    connection-timeout: 10000
+    listener:
+      simple:
+        retry:
+          enabled: true     #开启重试
+          max-attempts: 3   #最大重试次数
+          initial-interval: 1000  #重试时间间隔,ms
+        default-requeue-rejected: true  #重试超过设置次数后是否丢弃
+
+  data:
+    mongodb:
+      host:  ${MONGO_SERVER_HOST}
+      username: gms
+      password: 123456
+      database: admin
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+logging:
+  level:
+    com.baseboot: debug
